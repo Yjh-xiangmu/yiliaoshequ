@@ -1,0 +1,206 @@
+/* pages/order-payment/order-payment.wxss */
+.page {
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  padding-bottom: 160rpx;
+}
+
+/* 金额卡片 */
+.amount-card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 60rpx 30rpx;
+  text-align: center;
+  margin-bottom: 20rpx;
+}
+
+.amount-label {
+  font-size: 28rpx;
+  color: rgba(255,255,255,0.9);
+  margin-bottom: 20rpx;
+}
+
+.amount-value {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  margin-bottom: 20rpx;
+}
+
+.currency {
+  font-size: 36rpx;
+  color: #fff;
+  margin-right: 8rpx;
+}
+
+.number {
+  font-size: 96rpx;
+  font-weight: bold;
+  color: #fff;
+  line-height: 1;
+}
+
+.order-no {
+  font-size: 24rpx;
+  color: rgba(255,255,255,0.7);
+}
+
+/* 信息卡片 */
+.info-card,
+.pay-method-card,
+.detail-card {
+  background-color: #fff;
+  margin: 0 30rpx 20rpx;
+  padding: 30rpx;
+  border-radius: 20rpx;
+  box-shadow: 0 2rpx 16rpx rgba(0,0,0,0.06);
+}
+
+.info-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 24rpx;
+  padding-bottom: 16rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16rpx 0;
+  border-bottom: 1rpx solid #f9f9f9;
+}
+
+.info-row:last-child { border-bottom: none; }
+
+.info-row .label { font-size: 28rpx; color: #999; }
+.info-row .value { font-size: 28rpx; color: #1a1a1a; font-weight: 500; }
+
+/* 支付方式 */
+.method-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24rpx 0;
+  border: 2rpx solid transparent;
+  border-radius: 12rpx;
+}
+
+.method-item.active {
+  border-color: #667eea;
+  padding: 24rpx 20rpx;
+  background-color: #f0f3ff;
+}
+
+.method-left {
+  display: flex;
+  align-items: center;
+}
+
+.method-icon { font-size: 44rpx; margin-right: 20rpx; }
+.method-name { font-size: 30rpx; color: #1a1a1a; font-weight: 500; }
+.method-check { font-size: 32rpx; color: #667eea; font-weight: bold; }
+
+/* 费用明细 */
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 16rpx 0;
+}
+
+.detail-row .label { font-size: 28rpx; color: #666; }
+.detail-row .value { font-size: 28rpx; color: #1a1a1a; }
+.detail-row .discount { color: #52c41a; }
+
+.detail-divider {
+  height: 1rpx;
+  background-color: #f0f0f0;
+  margin: 8rpx 0;
+}
+
+.detail-row.total .label {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.total-value {
+  font-size: 36rpx !important;
+  font-weight: bold !important;
+  color: #ff4d4f !important;
+}
+
+/* 已支付状态 */
+.paid-card {
+  background-color: #fff;
+  margin: 0 30rpx 20rpx;
+  padding: 60rpx 30rpx;
+  border-radius: 20rpx;
+  text-align: center;
+  box-shadow: 0 2rpx 16rpx rgba(0,0,0,0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.paid-icon { font-size: 100rpx; margin-bottom: 20rpx; }
+.paid-text { font-size: 36rpx; font-weight: bold; color: #52c41a; margin-bottom: 16rpx; }
+.paid-no { font-size: 24rpx; color: #999; margin-bottom: 8rpx; }
+.paid-time { font-size: 24rpx; color: #999; }
+
+/* 底部按钮 */
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  padding: 20rpx 30rpx;
+  padding-bottom: calc(20rpx + env(safe-area-inset-bottom));
+  box-shadow: 0 -2rpx 16rpx rgba(0,0,0,0.06);
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.total-amount {
+  font-size: 28rpx;
+  color: #666;
+  flex: 1;
+}
+
+.highlight {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #ff4d4f;
+}
+
+.pay-btn {
+  width: 300rpx;
+  height: 88rpx;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  border-radius: 44rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pay-btn::after { border: none; }
+
+.done-btn {
+  flex: 1;
+  height: 88rpx;
+  background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+  color: #fff;
+  border-radius: 44rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+  border: none;
+}
+
+.done-btn::after { border: none; }

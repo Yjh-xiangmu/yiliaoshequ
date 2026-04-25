@@ -1,0 +1,37 @@
+{
+  "pages": [
+    "pages/login/login",
+    "pages/index/index",
+    "pages/escort-home/escort-home",
+    "pages/hospital/hospital",
+    "pages/hospital-detail/hospital-detail",
+    "pages/order-create/order-create",
+    "pages/order-detail/order-detail",
+    "pages/pending-orders/pending-orders",
+    "pages/order-list/order-list",
+    "pages/escort-orders/escort-orders",
+    "pages/escort-order-detail/escort-order-detail",
+    "pages/order-evaluate/order-evaluate",
+    "pages/user-center/user-center",
+    "pages/escort-profile/escort-profile",
+    "pages/patient-list/patient-list",
+    "pages/my-evaluations/my-evaluations",
+    "pages/settings/settings",
+    "pages/escort-apply/escort-apply",
+    "pages/order-payment/order-payment",
+    "pages/escort-income/escort-income",
+    "pages/escort-evaluations/escort-evaluations"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#1890ff",
+    "navigationBarTitleText": "社区安心陪诊",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#f5f5f5"
+  },
+  "networkTimeout": {
+    "request": 60000,
+    "downloadFile": 60000
+  },
+  "sitemapLocation": "sitemap.json"
+}

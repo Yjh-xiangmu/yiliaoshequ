@@ -1,0 +1,76 @@
+<!--pages/escort-profile/escort-profile.wxml-->
+<view class="page">
+  <!-- 个人信息卡片 -->
+  <view class="profile-card">
+    <view class="profile-header">
+      <image class="avatar" src="/images/default-avatar.png" mode="aspectFill"></image>
+      <view class="info">
+        <view class="name">{{userInfo.nickname || '陪诊员'}}</view>
+        <view class="phone">{{userInfo.phone}}</view>
+      </view>
+    </view>
+    
+    <view class="profile-stats">
+      <view class="stat-item">
+        <view class="label">服务评分</view>
+        <view class="value">5.0</view>
+      </view>
+      <view class="stat-divider"></view>
+      <view class="stat-item">
+        <view class="label">服务次数</view>
+        <view class="value">0</view>
+      </view>
+      <view class="stat-divider"></view>
+      <view class="stat-item">
+        <view class="label">累计收入</view>
+        <view class="value">¥0</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 功能菜单 -->
+  <view class="menu-section">
+    <view class="menu-item" bindtap="goMyEvaluations">
+      <view class="menu-left">
+        <view class="menu-icon">⭐</view>
+        <view class="menu-text">我的评价</view>
+      </view>
+      <view class="menu-right">›</view>
+    </view>
+
+    <view class="menu-item" bindtap="goIncomeDetail">
+      <view class="menu-left">
+        <view class="menu-icon">💰</view>
+        <view class="menu-text">收入明细</view>
+      </view>
+      <view class="menu-right">›</view>
+    </view>
+
+    <view class="menu-item" bindtap="goSettings">
+      <view class="menu-left">
+        <view class="menu-icon">⚙️</view>
+        <view class="menu-text">设置</view>
+      </view>
+      <view class="menu-right">›</view>
+    </view>
+
+    <view class="menu-item" bindtap="goHelp">
+      <view class="menu-left">
+        <view class="menu-icon">❓</view>
+        <view class="menu-text">帮助中心</view>
+      </view>
+      <view class="menu-right">›</view>
+    </view>
+  </view>
+
+  <!-- 关于 -->
+  <view class="about-section">
+    <view class="about-item">版本号：v1.0.0</view>
+    <view class="about-item">社区安心陪诊 · 陪诊员版</view>
+  </view>
+
+  <!-- 退出登录 -->
+  <view class="logout-section">
+    <button class="logout-btn" bindtap="handleLogout">退出登录</button>
+  </view>
+</view>

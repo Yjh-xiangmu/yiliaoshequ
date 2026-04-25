@@ -1,0 +1,264 @@
+/* pages/escort-home/escort-home.wxss */
+.page {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #11998e 0%, #f5f5f5 30%);
+  padding-bottom: 40rpx;
+}
+
+/* 顶部用户信息 */
+.header-card {
+  margin: 30rpx;
+  padding: 30rpx;
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 24rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.1);
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+}
+
+.avatar {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+  margin-right: 20rpx;
+  flex-shrink: 0;
+}
+
+.info {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.name {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #1a1a1a;
+  margin-bottom: 8rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.role {
+  display: flex;
+  align-items: center;
+}
+
+.role-badge {
+  padding: 6rpx 16rpx;
+  background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+  color: #fff;
+  border-radius: 20rpx;
+  font-size: 22rpx;
+  font-weight: 500;
+  display: inline-block;
+}
+
+/* 在线状态切换 */
+.online-toggle {
+  flex-shrink: 0;
+  margin-left: 20rpx;
+}
+
+.toggle-btn {
+  padding: 16rpx 24rpx;
+  border-radius: 30rpx;
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  font-size: 26rpx;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+
+.toggle-btn.online {
+  background-color: #f0fdf4;
+  color: #22c55e;
+  border: 2rpx solid #22c55e;
+}
+
+.toggle-btn.offline {
+  background-color: #fef2f2;
+  color: #ef4444;
+  border: 2rpx solid #ef4444;
+}
+
+.status-dot {
+  width: 12rpx;
+  height: 12rpx;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.toggle-btn.online .status-dot {
+  background-color: #22c55e;
+  animation: blink 2s infinite;
+}
+
+.toggle-btn.offline .status-dot {
+  background-color: #ef4444;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* 今日数据卡片 */
+.stats-card {
+  background-color: #fff;
+  margin: 0 30rpx 20rpx;
+  padding: 40rpx 30rpx;
+  border-radius: 24rpx;
+  display: flex;
+  justify-content: space-around;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.08);
+}
+
+.stat-item {
+  text-align: center;
+  flex: 1;
+}
+
+.stat-value {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #11998e;
+  margin-bottom: 8rpx;
+}
+
+.stat-label {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.stat-divider {
+  width: 2rpx;
+  background-color: #e8e8e8;
+  margin: 0 20rpx;
+}
+
+/* 区块 */
+.section {
+  margin: 20rpx 30rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #1a1a1a;
+  margin-bottom: 20rpx;
+  padding-left: 20rpx;
+  border-left: 6rpx solid #11998e;
+}
+
+/* 订单统计 */
+.order-stats {
+  background-color: #fff;
+  padding: 30rpx;
+  border-radius: 20rpx;
+  display: flex;
+  justify-content: space-around;
+  box-shadow: 0 2rpx 16rpx rgba(0, 0, 0, 0.06);
+}
+
+.order-stat-item {
+  text-align: center;
+  flex: 1;
+}
+
+.stat-number {
+  font-size: 56rpx;
+  font-weight: bold;
+  background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 8rpx;
+}
+
+.stat-name {
+  font-size: 26rpx;
+  color: #666;
+}
+
+/* 功能网格 */
+.function-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20rpx;
+}
+
+.function-item {
+  background-color: #fff;
+  padding: 30rpx 20rpx;
+  border-radius: 20rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 2rpx 16rpx rgba(0, 0, 0, 0.06);
+  transition: all 0.3s;
+}
+
+.function-item:active {
+  transform: scale(0.95);
+  box-shadow: 0 1rpx 8rpx rgba(0, 0, 0, 0.08);
+}
+
+.function-icon {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16rpx;
+}
+
+.gradient-orange {
+  background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+}
+
+.gradient-blue {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.gradient-green {
+  background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+}
+
+.gradient-purple {
+  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+}
+
+.gradient-pink {
+  background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+}
+
+.gradient-cyan {
+  background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
+}
+
+.icon-text {
+  font-size: 48rpx;
+}
+
+.function-label {
+  font-size: 26rpx;
+  color: #666;
+  text-align: center;
+}
+
+/* 底部安全边距 */
+.bottom-safe {
+  height: 40rpx;
+}

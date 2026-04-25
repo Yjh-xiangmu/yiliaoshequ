@@ -1,0 +1,309 @@
+/* pages/order-create/order-create.wxss */
+.page {
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  padding-bottom: 150rpx;
+}
+
+.content {
+  padding: 30rpx;
+}
+
+/* 区块 */
+.section {
+  margin-bottom: 30rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #1a1a1a;
+  margin-bottom: 20rpx;
+  padding-left: 20rpx;
+  border-left: 6rpx solid #667eea;
+}
+
+/* 医院信息 */
+.hospital-info {
+  background-color: #fff;
+  padding: 30rpx;
+  border-radius: 20rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2rpx 16rpx rgba(0, 0, 0, 0.06);
+}
+
+.hospital-name {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #1a1a1a;
+  flex: 1;
+}
+
+.department-tag {
+  padding: 8rpx 20rpx;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  border-radius: 20rpx;
+  font-size: 24rpx;
+  margin-left: 20rpx;
+}
+
+/* 表单卡片 */
+.form-card {
+  background-color: #fff;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  box-shadow: 0 2rpx 16rpx rgba(0, 0, 0, 0.06);
+}
+
+.form-item {
+  margin-bottom: 30rpx;
+}
+
+.form-item:last-child {
+  margin-bottom: 0;
+}
+
+.form-item.textarea {
+  margin-bottom: 0;
+}
+
+.form-label {
+  font-size: 28rpx;
+  color: #333;
+  margin-bottom: 16rpx;
+  display: flex;
+  align-items: center;
+}
+
+.required {
+  color: #ff4d4f;
+  margin-left: 4rpx;
+}
+
+.form-input {
+  width: 100%;
+  height: 80rpx;
+  background-color: #f5f5f5;
+  border-radius: 12rpx;
+  padding: 0 24rpx;
+  font-size: 28rpx;
+  box-sizing: border-box;
+}
+
+.picker-value {
+  height: 80rpx;
+  background-color: #f5f5f5;
+  border-radius: 12rpx;
+  padding: 0 24rpx;
+  font-size: 28rpx;
+  display: flex;
+  align-items: center;
+  color: #1a1a1a;
+}
+
+.picker-value.placeholder {
+  color: #999;
+}
+
+.form-textarea {
+  width: 100%;
+  min-height: 200rpx;
+  background-color: #f5f5f5;
+  border-radius: 12rpx;
+  padding: 24rpx;
+  font-size: 28rpx;
+  box-sizing: border-box;
+}
+
+.textarea-count {
+  text-align: right;
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 12rpx;
+}
+
+/* 费用卡片 */
+.price-card {
+  background-color: #fff;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  box-shadow: 0 2rpx 16rpx rgba(0, 0, 0, 0.06);
+}
+
+.price-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+
+.price-label {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.price-value {
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #ff4d4f;
+}
+
+.price-note {
+  font-size: 24rpx;
+  color: #999;
+  text-align: right;
+}
+
+/* 服务协议 */
+.agreement {
+  padding: 30rpx;
+}
+
+.agreement-item {
+  display: flex;
+  align-items: center;
+}
+
+.agreement-text {
+  font-size: 26rpx;
+  color: #666;
+  margin-left: 16rpx;
+  line-height: 1.6;
+}
+
+.link {
+  color: #667eea;
+}
+
+/* 底部操作栏 */
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  padding: 20rpx 30rpx;
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+  box-shadow: 0 -2rpx 16rpx rgba(0, 0, 0, 0.06);
+  padding-bottom: calc(20rpx + env(safe-area-inset-bottom));
+}
+
+.price-info {
+  flex: 1;
+}
+
+.price-info .price-label {
+  font-size: 24rpx;
+  color: #999;
+  margin-bottom: 4rpx;
+}
+
+.price-info .price-value {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #ff4d4f;
+}
+
+.submit-btn {
+  flex: 1;
+  height: 88rpx;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  border-radius: 44rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+}
+
+.submit-btn::after {
+  border: none;
+}
+/* 快速选择就诊人 */
+.section-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.section-link {
+  font-size: 26rpx;
+  color: #667eea;
+}
+
+.patient-scroll {
+  white-space: nowrap;
+  margin-bottom: 4rpx;
+}
+
+.patient-list {
+  display: inline-flex;
+  gap: 20rpx;
+  padding: 4rpx 4rpx 16rpx;
+}
+
+.patient-item {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 160rpx;
+  height: 120rpx;
+  background-color: #fff;
+  border-radius: 16rpx;
+  border: 2rpx solid #e0e0e0;
+  box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.06);
+  position: relative;
+  flex-shrink: 0;
+  transition: all 0.3s;
+}
+
+.patient-item.active {
+  border-color: #667eea;
+  background: linear-gradient(135deg, #f0f3ff 0%, #f5f0ff 100%);
+  box-shadow: 0 4rpx 16rpx rgba(102, 126, 234, 0.2);
+}
+
+.patient-item .patient-name {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 8rpx;
+}
+
+.patient-item.active .patient-name {
+  color: #667eea;
+}
+
+.patient-item .patient-relation {
+  font-size: 22rpx;
+  color: #999;
+}
+
+.patient-item.active .patient-relation {
+  color: #764ba2;
+}
+
+.default-dot {
+  position: absolute;
+  top: 10rpx;
+  right: 10rpx;
+  width: 12rpx;
+  height: 12rpx;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 50%;
+}
+
+/* 禁用状态的输入框 */
+.form-input[disabled] {
+  color: #666;
+  background-color: #f0f0f0;
+}

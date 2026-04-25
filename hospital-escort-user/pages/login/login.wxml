@@ -1,0 +1,108 @@
+<!--pages/login/login.wxml-->
+<view class="login-container">
+  <!-- Logo区域 -->
+  <view class="logo-section">
+    <view class="logo">🏥</view>
+    <view class="app-name">社区安心陪诊</view>
+    <view class="app-desc">专业陪诊服务，让就医更安心</view>
+  </view>
+
+  <!-- 角色切换 -->
+  <view class="role-switch">
+    <view 
+      class="role-item {{loginType === 'user' ? 'active' : ''}}" 
+      bindtap="switchRole" 
+      data-type="user"
+    >
+      <text class="role-icon">👤</text>
+      <text class="role-text">我是用户</text>
+    </view>
+    <view 
+      class="role-item {{loginType === 'escort' ? 'active' : ''}}" 
+      bindtap="switchRole" 
+      data-type="escort"
+    >
+      <text class="role-icon">👨‍⚕️</text>
+      <text class="role-text">我是陪诊员</text>
+    </view>
+  </view>
+
+  <!-- 用户登录区域 -->
+  <view wx:if="{{loginType === 'user'}}" class="login-section">
+    <!-- 微信授权登录按钮 -->
+    <button 
+      class="btn-login" 
+      type="primary"
+      bindtap="handleWxLogin"
+    >
+      <text class="icon">✨</text>
+      微信一键登录
+    </button>
+
+    <!-- 开发环境测试登录 -->
+    <button 
+      wx:if="{{isDev}}"
+      class="btn-test-login" 
+      bindtap="handleTestLogin"
+    >
+      <text class="icon">🔧</text>
+      测试登录（开发用）
+    </button>
+
+    <!-- 提示信息 -->
+    <view class="login-tips">
+      <text>登录即表示同意</text>
+      <text class="link">《用户协议》</text>
+      <text>和</text>
+      <text class="link">《隐私政策》</text>
+    </view>
+  </view>
+
+  <!-- 陪诊员登录区域 -->
+  <view wx:else class="login-section">
+    <view class="form">
+      <view class="form-item">
+        <view class="label">手机号</view>
+        <input 
+          class="input" 
+          type="number" 
+          placeholder="请输入手机号" 
+          maxlength="11"
+          value="{{phone}}"
+          bindinput="onPhoneInput"
+        />
+      </view>
+      <view class="form-item">
+        <view class="label">密码</view>
+        <input 
+          class="input" 
+          type="password" 
+          placeholder="请输入密码"
+          value="{{password}}"
+          bindinput="onPasswordInput"
+        />
+      </view>
+    </view>
+
+    <button 
+      class="btn-login" 
+      type="primary"
+      bindtap="handleEscortLogin"
+    >
+      登录
+    </button>
+
+    <view class="forgot-password" bindtap="handleForgotPassword">
+      忘记密码？
+    </view>
+  </view>
+<!-- 陪诊员登录表单下方 -->
+<view wx:if="{{loginType === 'escort'}}" class="apply-entry">
+  <text class="apply-text">还没有陪诊员账号？</text>
+  <text class="apply-link" bindtap="goApply">立即申请 ›</text>
+</view>
+  <!-- 底部 -->
+  <view class="footer">
+    <view class="footer-text">让就医陪诊更简单</view>
+  </view>
+</view>

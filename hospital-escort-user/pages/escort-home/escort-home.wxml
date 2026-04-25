@@ -1,0 +1,104 @@
+<!--pages/escort-home/escort-home.wxml-->
+<view class="page">
+  <!-- 顶部用户信息 -->
+  <view class="header-card">
+    <view class="user-info">
+      <image class="avatar" src="{{userInfo.avatar || '/images/default-avatar.png'}}" mode="aspectFill"></image>
+      <view class="info">
+        <view class="name">{{userInfo.nickname || '陪诊员'}}</view>
+        <view class="role">
+          <text class="role-badge">专业陪诊</text>
+        </view>
+      </view>
+    </view>
+    <view class="online-toggle" bindtap="toggleOnlineStatus">
+      <view class="toggle-btn {{isOnline ? 'online' : 'offline'}}">
+        <text class="status-dot"></text>
+        <text class="status-text">{{isOnline ? '在线' : '离线'}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 今日数据 -->
+  <view class="stats-card">
+    <view class="stat-item">
+      <view class="stat-value">{{todayData.orderCount}}</view>
+      <view class="stat-label">今日接单</view>
+    </view>
+    <view class="stat-divider"></view>
+    <view class="stat-item">
+      <view class="stat-value">¥{{todayData.income}}</view>
+      <view class="stat-label">今日收入</view>
+    </view>
+    <view class="stat-divider"></view>
+    <view class="stat-item">
+      <view class="stat-value">¥{{totalIncome}}</view>
+      <view class="stat-label">累计收入</view>
+    </view>
+  </view>
+
+  <!-- 订单统计 -->
+  <view class="section">
+    <view class="section-title">订单管理</view>
+    <view class="order-stats">
+      <view class="order-stat-item" bindtap="goAcceptedOrders">
+        <view class="stat-number">{{orderCount.accepted}}</view>
+        <view class="stat-name">已接订单</view>
+      </view>
+      <view class="order-stat-item" bindtap="goInServiceOrders">
+        <view class="stat-number">{{orderCount.inService}}</view>
+        <view class="stat-name">服务中</view>
+      </view>
+      <view class="order-stat-item" bindtap="goCompletedOrders">
+        <view class="stat-number">{{orderCount.completed}}</view>
+        <view class="stat-name">已完成</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 快捷功能 -->
+  <view class="section">
+    <view class="section-title">快捷功能</view>
+    <view class="function-grid">
+      <view class="function-item" bindtap="goPendingOrders">
+        <view class="function-icon gradient-orange">
+          <text class="icon-text">📋</text>
+        </view>
+        <view class="function-label">待接订单</view>
+      </view>
+      <view class="function-item" bindtap="goMyOrders">
+        <view class="function-icon gradient-blue">
+          <text class="icon-text">📦</text>
+        </view>
+        <view class="function-label">我的订单</view>
+      </view>
+      <view class="function-item" bindtap="goIncomeDetail">
+        <view class="function-icon gradient-green">
+          <text class="icon-text">💰</text>
+        </view>
+        <view class="function-label">收入明细</view>
+      </view>
+      <view class="function-item" bindtap="goEvaluations">
+        <view class="function-icon gradient-purple">
+          <text class="icon-text">⭐</text>
+        </view>
+        <view class="function-label">服务评价</view>
+      </view>
+      <view class="function-item" bindtap="goEscortProfile">
+        <view class="function-icon gradient-pink">
+          <text class="icon-text">👤</text>
+        </view>
+        <view class="function-label">个人中心</view>
+      </view>
+      <view class="function-item" bindtap="goHelp">
+        <view class="function-icon gradient-cyan">
+          <text class="icon-text">❓</text>
+        </view>
+        <view class="function-label">帮助中心</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部安全边距 -->
+  <view class="bottom-safe"></view>
+</view>

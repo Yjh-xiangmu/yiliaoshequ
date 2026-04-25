@@ -1,0 +1,244 @@
+/* pages/login/login.wxss */
+.login-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 60rpx 60rpx 60rpx;
+  box-sizing: border-box;
+}
+
+/* Logo区域 */
+.logo-section {
+  text-align: center;
+  margin-top: 60rpx;
+  animation: fadeInDown 1s ease;
+}
+
+.logo {
+  width: 200rpx;
+  height: 200rpx;
+  background-color: white;
+  border-radius: 50%;
+  margin: 0 auto 40rpx;
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 100rpx;
+}
+
+.app-name {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 20rpx;
+  letter-spacing: 4rpx;
+}
+
+.app-desc {
+  font-size: 28rpx;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.6;
+}
+
+/* 角色切换 */
+.role-switch {
+  display: flex;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 50rpx;
+  padding: 8rpx;
+  margin: 60rpx 0 40rpx;
+  animation: fadeIn 1s ease;
+}
+
+.role-item {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20rpx;
+  border-radius: 50rpx;
+  transition: all 0.3s;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.role-item.active {
+  background-color: white;
+  color: #667eea;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
+}
+
+.role-icon {
+  font-size: 40rpx;
+  margin-right: 10rpx;
+}
+
+.role-text {
+  font-size: 30rpx;
+  font-weight: bold;
+}
+
+/* 登录按钮区域 */
+.login-section {
+  animation: fadeInUp 1s ease;
+}
+
+/* 表单 */
+.form {
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 20rpx;
+  padding: 40rpx;
+  margin-bottom: 30rpx;
+}
+
+.form-item {
+  margin-bottom: 30rpx;
+}
+
+.form-item:last-child {
+  margin-bottom: 0;
+}
+
+.label {
+  font-size: 28rpx;
+  color: #333;
+  margin-bottom: 15rpx;
+  font-weight: bold;
+}
+
+.input {
+  width: 100%;
+  height: 80rpx;
+  background-color: #f5f5f5;
+  border-radius: 12rpx;
+  padding: 0 20rpx;
+  font-size: 30rpx;
+  box-sizing: border-box;
+}
+
+/* 按钮 */
+.btn-login {
+  width: 100%;
+  height: 100rpx;
+  background: linear-gradient(135deg, #1890ff, #096dd9);
+  color: #fff;
+  border-radius: 50rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8rpx 24rpx rgba(24, 144, 255, 0.4);
+  border: none;
+  margin-bottom: 30rpx;
+}
+
+.btn-login::after {
+  border: none;
+}
+
+.btn-test-login {
+  width: 100%;
+  height: 100rpx;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  border-radius: 50rpx;
+  font-size: 28rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2rpx solid rgba(255, 255, 255, 0.4);
+  margin-bottom: 30rpx;
+}
+
+.btn-test-login::after {
+  border: none;
+}
+
+.icon {
+  margin-right: 10rpx;
+  font-size: 36rpx;
+}
+
+.forgot-password {
+  text-align: center;
+  font-size: 28rpx;
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: underline;
+}
+
+.login-tips {
+  text-align: center;
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.8;
+  margin-top: 40rpx;
+}
+
+.link {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* 底部 */
+.footer {
+  text-align: center;
+  animation: fadeIn 2s ease;
+}
+
+.footer-text {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* 动画 */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-50rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(50rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.apply-entry {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30rpx;
+}
+
+.apply-text {
+  font-size: 26rpx;
+  color: #999;
+}
+
+.apply-link {
+  font-size: 26rpx;
+  color: #11998e;
+  font-weight: 500;
+  margin-left: 8rpx;
+}

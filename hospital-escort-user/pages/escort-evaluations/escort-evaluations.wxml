@@ -1,0 +1,46 @@
+<!--pages/escort-evaluations/escort-evaluations.wxml-->
+<view class="page">
+  <!-- 平均评分卡片 -->
+  <view class="rating-card">
+    <view class="rating-label">平均评分</view>
+    <view class="rating-value">{{averageRating}}</view>
+    <view class="stars">
+      <text wx:for="{{[1,2,3,4,5]}}" wx:key="index" class="star">⭐</text>
+    </view>
+    <view class="rating-count">共 {{evaluationList.length}} 条评价</view>
+  </view>
+
+  <!-- 评价列表 -->
+  <view class="eval-list">
+    <view wx:if="{{loading}}" class="loading">加载中...</view>
+
+    <view 
+      wx:for="{{evaluationList}}" 
+      wx:key="id"
+      class="eval-item"
+    >
+      <view class="eval-header">
+        <view class="user-name">{{item.anonymous === 1 ? '匿名用户' : '用户'}}</view>
+        <view class="eval-time">{{item.createTime}}</view>
+      </view>
+
+      <view class="rating-row">
+        <text wx:for="{{[1,2,3,4,5]}}" wx:key="idx" wx:for-item="star" class="star {{item.rating >= star ? 'active' : ''}}">⭐</text>
+      </view>
+
+      <view wx:if="{{item.tags}}" class="tags">
+        <view wx:for="{{item.tagList}}" wx:key="idx" wx:for-item="tag" class="tag">{{tag}}</view>
+      </view>
+
+      <view wx:if="{{item.comment}}" class="comment">"{{item.comment}}"</view>
+
+      <view class="order-info">订单号：{{item.orderNo}}</view>
+    </view>
+
+    <!-- 空状态 -->
+    <view wx:if="{{!loading && evaluationList.length === 0}}" class="empty">
+      <text class="empty-icon">⭐</text>
+      <text class="empty-text">暂无评价记录</text>
+    </view>
+  </view>
+</view>

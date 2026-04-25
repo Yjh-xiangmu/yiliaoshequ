@@ -1,0 +1,87 @@
+<!--pages/order-evaluate/order-evaluate.wxml-->
+<view class="page">
+  <view class="content">
+    <!-- 订单信息 -->
+    <view class="order-info">
+      <view class="hospital-name">{{order.hospitalName}}</view>
+      <view class="order-time">服务时间：{{order.appointmentTime}}</view>
+    </view>
+
+    <!-- 陪诊员信息 -->
+    <view class="escort-card">
+      <image class="avatar" src="/images/default-avatar.png" mode="aspectFill"></image>
+      <view class="escort-info">
+        <view class="name">{{order.escortName}}</view>
+        <view class="phone">{{order.escortPhone}}</view>
+      </view>
+    </view>
+
+    <!-- 评分 -->
+    <view class="rating-section">
+      <view class="section-title">服务评分</view>
+      <view class="stars">
+        <view 
+          wx:for="{{[1,2,3,4,5]}}" 
+          wx:key="index"
+          class="star {{rating >= item ? 'active' : ''}}"
+          bindtap="selectRating"
+          data-rating="{{item}}"
+        >
+          ⭐
+        </view>
+      </view>
+      <view class="rating-text">
+        <text wx:if="{{rating === 5}}">非常满意</text>
+        <text wx:elif="{{rating === 4}}">满意</text>
+        <text wx:elif="{{rating === 3}}">一般</text>
+        <text wx:elif="{{rating === 2}}">不满意</text>
+        <text wx:elif="{{rating === 1}}">非常不满意</text>
+        <text wx:else>请点击星星评分</text>
+      </view>
+    </view>
+
+    <!-- 服务标签 -->
+    <view class="tags-section">
+      <view class="section-title">服务标签</view>
+      <view class="tags">
+        <view 
+          wx:for="{{tagsList}}" 
+          wx:key="index"
+          class="tag {{item.selected ? 'selected' : ''}}"
+          bindtap="toggleTag"
+          data-index="{{index}}"
+        >
+          {{item.name}}
+        </view>
+      </view>
+    </view>
+
+    <!-- 评价内容 -->
+    <view class="comment-section">
+      <view class="section-title">评价内容</view>
+      <textarea 
+        class="comment-textarea"
+        placeholder="请输入您的评价（选填）"
+        value="{{comment}}"
+        bindinput="onCommentInput"
+        maxlength="200"
+      />
+      <view class="comment-count">{{comment.length}}/200</view>
+    </view>
+
+    <!-- 是否匿名 -->
+    <view class="anonymous-section">
+      <checkbox-group bindchange="onAnonymousChange">
+        <label class="anonymous-item">
+          <checkbox value="anonymous" checked="{{anonymous}}" />
+          <text class="anonymous-text">匿名评价</text>
+        </label>
+      </checkbox-group>
+    </view>
+  </view>
+
+  <!-- 底部按钮 -->
+  <view class="bottom-bar">
+    <button class="submit-btn" bindtap="submitEvaluation">提交评价</button>
+  </view>
+</view>

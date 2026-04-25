@@ -1,0 +1,51 @@
+<!--pages/my-evaluations/my-evaluations.wxml-->
+<view class="page">
+  <view wx:if="{{loading}}" class="loading">加载中...</view>
+
+  <view wx:else class="evaluation-list">
+    <!-- 评价卡片 -->
+    <view 
+      wx:for="{{evaluationList}}" 
+      wx:key="id" 
+      class="eval-card"
+    >
+      <!-- 头部：医院和时间 -->
+      <view class="eval-header">
+        <view class="hospital-name">{{item.hospitalName}}</view>
+        <view class="eval-time">{{item.createTime}}</view>
+      </view>
+
+      <!-- 评分 -->
+      <view class="rating-row">
+        <view class="stars">
+          <text wx:for="{{[1,2,3,4,5]}}" wx:key="index" wx:for-item="star" class="star {{item.rating >= star ? 'active' : ''}}">⭐</text>
+        </view>
+        <view class="rating-value">{{item.rating}}.0分</view>
+      </view>
+
+      <!-- 标签 -->
+      <view wx:if="{{item.tags}}" class="tags-row">
+        <view wx:for="{{item.tagList}}" wx:key="index" wx:for-item="tag" class="tag">{{tag}}</view>
+      </view>
+
+      <!-- 评价内容 -->
+      <view wx:if="{{item.comment}}" class="comment">
+        "{{item.comment}}"
+      </view>
+
+      <!-- 陪诊员信息 -->
+      <view class="escort-row">
+        <text class="label">陪诊员：</text>
+        <text class="value">{{item.escortName || '匿名'}}</text>
+        <text wx:if="{{item.anonymous === 1}}" class="anonymous-tag">匿名评价</text>
+      </view>
+    </view>
+
+    <!-- 空状态 -->
+    <view wx:if="{{evaluationList.length === 0}}" class="empty">
+      <text class="empty-icon">⭐</text>
+      <text class="empty-text">暂无评价记录</text>
+      <text class="empty-desc">完成订单后可以评价陪诊员</text>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,81 @@
+<!--pages/hospital-detail/hospital-detail.wxml-->
+<view class="page">
+  <!-- 加载中 -->
+  <view wx:if="{{loading}}" class="loading">
+    <text>加载中...</text>
+  </view>
+
+  <!-- 医院详情 -->
+  <view wx:else class="content">
+    <!-- 医院头部 -->
+    <view class="hospital-header">
+      <view class="hospital-name">{{hospital.name}}</view>
+      <view class="hospital-level">{{hospital.level}}</view>
+    </view>
+
+    <!-- 医院信息卡片 -->
+    <view class="info-card">
+      <view class="info-item">
+        <view class="info-label">
+          <text class="icon">📍</text>
+          <text class="text">医院地址</text>
+        </view>
+        <view class="info-value">{{hospital.address}}</view>
+      </view>
+
+      <view class="info-item">
+        <view class="info-label">
+          <text class="icon">📞</text>
+          <text class="text">联系电话</text>
+        </view>
+        <view class="info-value">{{hospital.phone}}</view>
+      </view>
+    </view>
+
+    <!-- 科室选择 -->
+    <view class="section">
+      <view class="section-title">选择科室</view>
+      <view class="department-grid">
+        <view 
+          wx:for="{{hospital.departments}}" 
+          wx:key="index"
+          class="department-item {{selectedDepartment === item ? 'active' : ''}}"
+          bindtap="selectDepartment"
+          data-department="{{item}}"
+        >
+          {{item}}
+        </view>
+      </view>
+    </view>
+
+    <!-- 医院简介 -->
+    <view class="section">
+      <view class="section-title">医院简介</view>
+      <view class="intro-card">
+        <text class="intro-text">{{hospital.name}}是一家{{hospital.level}}综合性医院，拥有先进的医疗设备和专业的医疗团队，为广大患者提供优质的医疗服务。</text>
+      </view>
+    </view>
+
+    <!-- 温馨提示 -->
+    <view class="section">
+      <view class="section-title">温馨提示</view>
+      <view class="tips-card">
+        <view class="tip-item">• 请携带身份证和就诊卡</view>
+        <view class="tip-item">• 提前30分钟到达医院</view>
+        <view class="tip-item">• 如有特殊需求请提前告知陪诊员</view>
+        <view class="tip-item">• 保持手机畅通，方便陪诊员联系</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部操作栏 -->
+  <view class="bottom-bar">
+    <view class="contact-btn" bindtap="callHospital">
+      <text class="icon">📞</text>
+      <text class="text">联系医院</text>
+    </view>
+    <view class="book-btn" bindtap="goCreateOrder">
+      立即预约
+    </view>
+  </view>
+</view>

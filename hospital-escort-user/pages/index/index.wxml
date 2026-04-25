@@ -1,0 +1,146 @@
+<!--pages/index/index.wxml-->
+<view class="page">
+  <!-- 顶部用户信息卡片 -->
+  <view class="user-card">
+    <view class="user-info">
+      <image class="avatar" src="{{userInfo.avatar || '/images/default-avatar.png'}}" mode="aspectFill"></image>
+      <view class="info">
+        <view class="name">{{userInfo.nickname || '微信用户'}}</view>
+        <view class="role">
+          <text class="role-badge">普通用户</text>
+        </view>
+      </view>
+    </view>
+    <view class="user-action" bindtap="handleLogout">
+      <text class="logout-text">退出</text>
+    </view>
+  </view>
+
+  <!-- Banner轮播 -->
+  <view class="banner-section">
+    <swiper class="banner-swiper" indicator-dots indicator-color="rgba(255,255,255,0.5)" indicator-active-color="#fff" autoplay circular>
+      <swiper-item>
+        <view class="banner-item gradient-1">
+          <view class="banner-content">
+            <view class="banner-title">7×24小时服务</view>
+            <view class="banner-desc">随时随地预约陪诊</view>
+          </view>
+        </view>
+      </swiper-item>
+      <swiper-item>
+        <view class="banner-item gradient-2">
+          <view class="banner-content">
+            <view class="banner-title">专业陪诊服务</view>
+            <view class="banner-desc">让就医更安心</view>
+          </view>
+        </view>
+      </swiper-item>
+    </swiper>
+  </view>
+
+  <!-- 快捷入口 -->
+  <view class="quick-nav">
+    <view class="nav-item" bindtap="goHospitalList">
+      <view class="nav-icon gradient-blue">
+        <text class="icon-text">🏥</text>
+      </view>
+      <view class="nav-label">选择医院</view>
+    </view>
+    <view class="nav-item" bindtap="goOrderList">
+      <view class="nav-icon gradient-green">
+        <text class="icon-text">📋</text>
+      </view>
+      <view class="nav-label">我的订单</view>
+    </view>
+    <view class="nav-item" bindtap="goEvaluation">
+      <view class="nav-icon gradient-orange">
+        <text class="icon-text">⭐</text>
+      </view>
+      <view class="nav-label">服务评价</view>
+    </view>
+    <view class="nav-item" bindtap="goUserCenter">
+      <view class="nav-icon gradient-purple">
+        <text class="icon-text">👤</text>
+      </view>
+      <view class="nav-label">个人中心</view>
+    </view>
+  </view>
+
+  <!-- 我的订单 -->
+  <view class="section">
+    <view class="section-header">
+      <view class="section-title">我的订单</view>
+      <view class="section-more" bindtap="goOrderList">查看全部 ›</view>
+    </view>
+    <view class="order-types">
+      <view class="order-type-item" bindtap="goOrderList" data-status="">
+        <view class="order-type-icon">
+          <text class="icon">📋</text>
+          <view class="badge" wx:if="{{orderCount.all > 0}}">{{orderCount.all}}</view>
+        </view>
+        <view class="order-type-label">全部订单</view>
+      </view>
+      <view class="order-type-item" bindtap="goOrderList" data-status="0">
+        <view class="order-type-icon">
+          <text class="icon">⏰</text>
+          <view class="badge" wx:if="{{orderCount.pending > 0}}">{{orderCount.pending}}</view>
+        </view>
+        <view class="order-type-label">待接单</view>
+      </view>
+      <view class="order-type-item" bindtap="goOrderList" data-status="2">
+        <view class="order-type-icon">
+          <text class="icon">🏃</text>
+          <view class="badge" wx:if="{{orderCount.inService > 0}}">{{orderCount.inService}}</view>
+        </view>
+        <view class="order-type-label">服务中</view>
+      </view>
+      <view class="order-type-item" bindtap="goOrderList" data-status="3">
+        <view class="order-type-icon">
+          <text class="icon">✅</text>
+        </view>
+        <view class="order-type-label">已完成</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 服务流程 -->
+  <view class="section">
+    <view class="section-title">服务流程</view>
+    <view class="process-card">
+      <view class="process-step">
+        <view class="step-number">1</view>
+        <view class="step-info">
+          <view class="step-title">选择医院</view>
+          <view class="step-desc">浏览医院列表，选择就诊医院</view>
+        </view>
+      </view>
+      <view class="process-line"></view>
+      <view class="process-step">
+        <view class="step-number">2</view>
+        <view class="step-info">
+          <view class="step-title">填写信息</view>
+          <view class="step-desc">填写就诊人信息和服务需求</view>
+        </view>
+      </view>
+      <view class="process-line"></view>
+      <view class="process-step">
+        <view class="step-number">3</view>
+        <view class="step-info">
+          <view class="step-title">等待接单</view>
+          <view class="step-desc">系统匹配专业陪诊员</view>
+        </view>
+      </view>
+      <view class="process-line"></view>
+      <view class="process-step">
+        <view class="step-number">4</view>
+        <view class="step-info">
+          <view class="step-title">专业服务</view>
+          <view class="step-desc">陪诊员全程陪同就医</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部安全边距 -->
+  <view class="bottom-safe"></view>
+</view>

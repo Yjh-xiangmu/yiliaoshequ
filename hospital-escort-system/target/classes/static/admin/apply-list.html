@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>申请审核 - 管理后台</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif; background-color: #f5f5f5; }
+        .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .header-title { font-size: 24px; font-weight: bold; }
+        .back-btn { background: rgba(255,255,255,0.2); border: 2px solid rgba(255,255,255,0.5); color: white; padding: 8px 20px; border-radius: 20px; cursor: pointer; font-size: 14px; text-decoration: none; }
+        .container { max-width: 1400px; margin: 30px auto; padding: 0 20px; }
+        .tabs { display: flex; gap: 10px; margin-bottom: 20px; background: white; padding: 15px; border-radius: 10px; }
+        .tab { padding: 10px 20px; border-radius: 8px; cursor: pointer; transition: all 0.3s; font-size: 14px; }
+        .tab.active { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
+        .apply-list { display: grid; gap: 20px; }
+        .apply-card { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); }
+        .apply-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 2px solid #f0f0f0; }
+        .apply-name { font-size: 20px; font-weight: bold; color: #1a1a1a; }
+        .status-badge { padding: 5px 15px; border-radius: 15px; font-size: 13px; font-weight: 500; }
+        .status-0 { background: #fff9e6; color: #fa8c16; }
+        .status-1 { background: #f0fdf4; color: #22c55e; }
+        .status-2 { background: #fef2f2; color: #ef4444; }
+        .apply-info { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-bottom: 20px; }
+        .info-item { font-size: 14px; }
+        .info-label { color: #999; margin-bottom: 5px; font-size: 13px; }
+        .info-value { color: #1a1a1a; font-weight: 500; }
+
+        /* 证件照片区域 */
+        .cert-section { margin: 20px 0; }
+        .cert-title { font-size: 15px; font-weight: 600; color: #1a1a1a; margin-bottom: 15px; padding-left: 10px; border-left: 4px solid #667eea; }
+        .cert-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+        .cert-item { text-align: center; }
+        .cert-label { font-size: 13px; color: #666; margin-bottom: 8px; }
+        .cert-image-wrapper { position: relative; width: 100%; padding-top: 75%; background: #f5f5f5; border-radius: 10px; overflow: hidden; border: 2px solid #e0e0e0; cursor: pointer; }
+        .cert-image { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
+        .cert-placeholder { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #ccc; font-size: 14px; }
+        .cert-image-wrapper:hover { border-color: #667eea; }
+
+        .intro-box { background: #f9f9f9; padding: 15px; border-radius: 10px; margin: 15px 0; }
+        .intro-label { font-size: 13px; color: #999; margin-bottom: 8px; }
+        .intro-text { font-size: 14px; color: #333; line-height: 1.6; }
+
+        .reject-reason { background: #fef2f2; padding: 15px; border-radius: 10px; margin: 15px 0; border-left: 4px solid #ef4444; }
+        .reject-label { font-size: 13px; color: #999; margin-bottom: 8px; }
+        .reject-text { font-size: 14px; color: #ef4444; line-height: 1.6; }
+
+        .actions { display: flex; gap: 10px; margin-top: 20px; }
+        .btn { padding: 12px 30px; border-radius: 8px; border: none; cursor: pointer; font-size: 15px; font-weight: 500; transition: all 0.3s; }
+        .btn-approve { background: #22c55e; color: white; }
+        .btn-reject { background: #ef4444; color: white; }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+        .empty { text-align: center; padding: 100px 0; color: #999; font-size: 16px; }
+
+        /* 图片预览模态框 */
+        .modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.9); z-index: 1000; align-items: center; justify-content: center; }
+        .modal.show { display: flex; }
+        .modal-image { max-width: 90%; max-height: 90%; object-fit: contain; }
+        .modal-close { position: absolute; top: 20px; right: 30px; color: white; font-size: 40px; cursor: pointer; }
+    </style>
+</head>
+<body>
+<div class="header">
+    <div class="header-title">申请审核</div>
+    <a href="dashboard.html" class="back-btn">返回首页</a>
+</div>
+
+<div class="container">
+    <div class="tabs">
+        <div class="tab active" onclick="filterStatus(null)">全部</div>
+        <div class="tab" onclick="filterStatus(0)">待审核</div>
+        <div class="tab" onclick="filterStatus(1)">已通过</div>
+        <div class="tab" onclick="filterStatus(2)">已拒绝</div>
+    </div>
+
+    <div class="apply-list" id="applyList"></div>
+</div>
+
+<!-- 图片预览模态框 -->
+<div class="modal" id="imageModal" onclick="closeModal()">
+    <span class="modal-close">&times;</span>
+    <img class="modal-image" id="modalImage" src="" alt="证件照片">
+</div>
+
+<script>
+    const API_BASE = 'http://192.168.10.105:8081/api';
+    const token = localStorage.getItem('admin_token');
+    let currentStatus = null;
+
+    if (!token) {
+        alert('请先登录');
+        window.location.href = 'index.html';
+    }
+
+    function filterStatus(status) {
+        currentStatus = status;
+        document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+        event.target.classList.add('active');
+        loadApplyList();
+    }
+
+    async function loadApplyList() {
+        try {
+            let url = `${API_BASE}/admin/escort-apply/list?current=1&size=100`;
+            if (currentStatus !== null) {
+                url += `&status=${currentStatus}`;
+            }
+
+            const response = await fetch(url, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+
+            const result = await response.json();
+            console.log('申请列表：', result);
+
+            if (result.code === 200) {
+                displayApplyList(result.data.records || []);
+            }
+        } catch (error) {
+            console.error('加载失败：', error);
+        }
+    }
+
+    function displayApplyList(list) {
+        const container = document.getElementById('applyList');
+
+        if (list.length === 0) {
+            container.innerHTML = '<div class="empty">暂无申请记录</div>';
+            return;
+        }
+
+        container.innerHTML = list.map(item => `
+                <div class="apply-card">
+                    <div class="apply-header">
+                        <div class="apply-name">${item.realName}</div>
+                        <div class="status-badge status-${item.status}">
+                            ${item.status === 0 ? '待审核' : item.status === 1 ? '已通过' : '已拒绝'}
+                        </div>
+                    </div>
+
+                    <div class="apply-info">
+                        <div class="info-item">
+                            <div class="info-label">手机号</div>
+                            <div class="info-value">${item.phone}</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">身份证号</div>
+                            <div class="info-value">${item.idCardNo}</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">申请时间</div>
+                            <div class="info-value">${formatTime(item.createTime)}</div>
+                        </div>
+                        ${item.auditTime ? `
+                        <div class="info-item">
+                            <div class="info-label">审核时间</div>
+                            <div class="info-value">${formatTime(item.auditTime)}</div>
+                        </div>
+                        ` : ''}
+                    </div>
+
+                    ${item.intro ? `
+                    <div class="intro-box">
+                        <div class="intro-label">个人简介</div>
+                        <div class="intro-text">${item.intro}</div>
+                    </div>
+                    ` : ''}
+
+                    <div class="cert-section">
+                        <div class="cert-title">📋 证件资料</div>
+                        <div class="cert-grid">
+                            <div class="cert-item">
+                                <div class="cert-label">身份证正面</div>
+                                <div class="cert-image-wrapper" onclick="previewImage('${item.idCardFront || ''}', event)">
+                                    ${item.idCardFront ?
+            `<img class="cert-image" src="${item.idCardFront}" alt="身份证正面" onerror="this.parentElement.innerHTML='<div class=cert-placeholder>图片加载失败</div>'">` :
+            '<div class="cert-placeholder">未上传</div>'
+        }
+                                </div>
+                            </div>
+                            <div class="cert-item">
+                                <div class="cert-label">身份证背面</div>
+                                <div class="cert-image-wrapper" onclick="previewImage('${item.idCardBack || ''}', event)">
+                                    ${item.idCardBack ?
+            `<img class="cert-image" src="${item.idCardBack}" alt="身份证背面" onerror="this.parentElement.innerHTML='<div class=cert-placeholder>图片加载失败</div>'">` :
+            '<div class="cert-placeholder">未上传</div>'
+        }
+                                </div>
+                            </div>
+                            <div class="cert-item">
+                                <div class="cert-label">健康证</div>
+                                <div class="cert-image-wrapper" onclick="previewImage('${item.healthCert || ''}', event)">
+                                    ${item.healthCert ?
+            `<img class="cert-image" src="${item.healthCert}" alt="健康证" onerror="this.parentElement.innerHTML='<div class=cert-placeholder>图片加载失败</div>'">` :
+            '<div class="cert-placeholder">未上传</div>'
+        }
+                                </div>
+                            </div>
+                            <div class="cert-item">
+                                <div class="cert-label">陪护资格证（选填）</div>
+                                <div class="cert-image-wrapper" onclick="previewImage('${item.escortCert || ''}', event)">
+                                    ${item.escortCert ?
+            `<img class="cert-image" src="${item.escortCert}" alt="陪护资格证" onerror="this.parentElement.innerHTML='<div class=cert-placeholder>图片加载失败</div>'">` :
+            '<div class="cert-placeholder">未上传</div>'
+        }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    ${item.status === 2 && item.rejectReason ? `
+                    <div class="reject-reason">
+                        <div class="reject-label">拒绝原因</div>
+                        <div class="reject-text">${item.rejectReason}</div>
+                    </div>
+                    ` : ''}
+
+                    ${item.status === 0 ? `
+                    <div class="actions">
+                        <button class="btn btn-approve" onclick="approve(${item.id})">✓ 审核通过</button>
+                        <button class="btn btn-reject" onclick="reject(${item.id})">✗ 拒绝申请</button>
+                    </div>
+                    ` : ''}
+                </div>
+            `).join('');
+    }
+
+    function formatTime(str) {
+        if (!str) return '';
+        return str.replace('T', ' ').substring(0, 16);
+    }
+
+    function previewImage(src, event) {
+        event.stopPropagation();
+        if (!src || src === 'null' || src === 'undefined' || src.trim() === '') {
+            alert('该证件未上传');
+            return;
+        }
+
+        // Base64数据可以直接显示
+        document.getElementById('modalImage').src = src;
+        document.getElementById('imageModal').classList.add('show');
+    }
+
+    function closeModal() {
+        document.getElementById('imageModal').classList.remove('show');
+    }
+
+    async function approve(id) {
+        if (!confirm('确定通过该申请吗？通过后将自动创建陪诊员账号。')) return;
+
+        try {
+            const response = await fetch(`${API_BASE}/admin/escort-apply/approve/${id}`, {
+                method: 'POST',
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+
+            const result = await response.json();
+            if (result.code === 200) {
+                alert('审核通过！已创建陪诊员账号');
+                loadApplyList();
+            } else {
+                alert(result.message || '操作失败');
+            }
+        } catch (error) {
+            alert('操作失败：' + error.message);
+        }
+    }
+
+    async function reject(id) {
+        const reason = prompt('请输入拒绝原因：');
+        if (!reason || reason.trim() === '') {
+            alert('请输入拒绝原因');
+            return;
+        }
+
+        try {
+            const response = await fetch(`${API_BASE}/admin/escort-apply/reject/${id}`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ reason: reason.trim() })
+            });
+
+            const result = await response.json();
+            if (result.code === 200) {
+                alert('已拒绝该申请');
+                loadApplyList();
+            } else {
+                alert(result.message || '操作失败');
+            }
+        } catch (error) {
+            alert('操作失败：' + error.message);
+        }
+    }
+
+    loadApplyList();
+</script>
+</body>
+</html>

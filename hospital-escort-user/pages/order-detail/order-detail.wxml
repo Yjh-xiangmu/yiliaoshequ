@@ -1,0 +1,126 @@
+<!--pages/order-detail/order-detail.wxml-->
+<view class="page">
+  <!-- 加载中 -->
+  <view wx:if="{{loading}}" class="loading">
+    <text>加载中...</text>
+  </view>
+
+  <!-- 订单详情 -->
+  <view wx:else class="content">
+    <!-- 状态卡片 -->
+    <view class="status-card status-{{order.status}}">
+      <view class="status-icon">
+        <text wx:if="{{order.status === 0}}">⏰</text>
+        <text wx:if="{{order.status === 1}}">📝</text>
+        <text wx:if="{{order.status === 2}}">🏃</text>
+        <text wx:if="{{order.status === 3}}">✅</text>
+        <text wx:if="{{order.status === 4}}">❌</text>
+      </view>
+      <view class="status-text">{{order.statusText}}</view>
+      <view class="status-desc">
+        <text wx:if="{{order.status === 0}}">等待陪诊员接单</text>
+        <text wx:if="{{order.status === 1}}">陪诊员已接单，请保持联系</text>
+        <text wx:if="{{order.status === 2}}">陪诊员正在为您服务</text>
+        <text wx:if="{{order.status === 3}}">服务已完成</text>
+        <text wx:if="{{order.status === 4}}">订单已取消</text>
+      </view>
+    </view>
+
+    <!-- 订单信息 -->
+    <view class="section">
+      <view class="section-title">订单信息</view>
+      <view class="info-card">
+        <view class="info-item">
+          <view class="label">订单编号</view>
+          <view class="value">{{order.orderNo}}</view>
+        </view>
+        <view class="info-item">
+          <view class="label">下单时间</view>
+          <view class="value">{{order.createTime}}</view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 就诊信息 -->
+    <view class="section">
+      <view class="section-title">就诊信息</view>
+      <view class="info-card">
+        <view class="info-item">
+          <view class="label">就诊医院</view>
+          <view class="value">{{order.hospitalName}}</view>
+        </view>
+        <view class="info-item">
+          <view class="label">就诊科室</view>
+          <view class="value">{{order.department}}</view>
+        </view>
+        <view class="info-item">
+          <view class="label">就诊人</view>
+          <view class="value">{{order.patientName}}</view>
+        </view>
+        <view class="info-item">
+          <view class="label">联系电话</view>
+          <view class="value">{{order.patientPhone}}</view>
+        </view>
+        <view class="info-item">
+          <view class="label">预约时间</view>
+          <view class="value">{{order.appointmentTime}}</view>
+        </view>
+        <view class="info-item">
+          <view class="label">服务类型</view>
+          <view class="value">{{order.serviceType}}</view>
+        </view>
+        <view wx:if="{{order.specialRequirements}}" class="info-item special">
+          <view class="label">特殊需求</view>
+          <view class="value">{{order.specialRequirements}}</view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 陪诊员信息 -->
+    <view wx:if="{{order.escortName}}" class="section">
+      <view class="section-title">陪诊员信息</view>
+      <view class="escort-card">
+        <view class="escort-info">
+          <image class="avatar" src="/images/default-avatar.png" mode="aspectFill"></image>
+          <view class="info">
+            <view class="name">{{order.escortName}}</view>
+            <view class="phone">{{order.escortPhone}}</view>
+          </view>
+        </view>
+        <view class="contact-btn" bindtap="callEscort">
+          <text class="icon">📞</text>
+          <text class="text">联系陪诊员</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 费用信息 -->
+    <view class="section">
+      <view class="section-title">费用信息</view>
+      <view class="price-card">
+        <view class="price-item">
+          <view class="label">服务费用</view>
+          <view class="price">¥{{order.price}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+<!-- 底部操作栏 -->
+<view wx:if="{{!loading}}" class="bottom-bar">
+  <!-- 待接单：可以取消 -->
+  <view wx:if="{{order.status === 0}}" class="action-btn cancel-btn" bindtap="cancelOrder">
+    取消订单
+  </view>
+
+  <!-- 已完成且未支付：去支付 -->
+  <view wx:if="{{order.status === 3 && !order.isPaid}}" class="action-btn pay-btn" bindtap="goPayment">
+    去支付 ¥{{order.price}}
+  </view>
+
+  <!-- 已完成且已支付且未评价：去评价 -->
+  <view wx:if="{{order.status === 3 && order.isPaid && !order.hasEvaluation}}" class="action-btn evaluate-btn" bindtap="goEvaluate">
+    评价服务
+  </view>
+</view>
+</view>

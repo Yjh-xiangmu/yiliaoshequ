@@ -1,0 +1,103 @@
+<!--pages/escort-orders/escort-orders.wxml-->
+<view class="page">
+  <!-- 状态筛选Tab -->
+  <view class="tabs">
+    <view 
+      wx:for="{{tabs}}" 
+      wx:key="index"
+      class="tab-item {{currentTab === index ? 'active' : ''}}"
+      bindtap="switchTab"
+      data-index="{{index}}"
+    >
+      {{item.name}}
+      <view wx:if="{{item.count > 0}}" class="tab-badge">{{item.count}}</view>
+      <view wx:if="{{currentTab === index}}" class="tab-indicator"></view>
+    </view>
+  </view>
+
+  <!-- 订单列表 -->
+  <view class="order-list">
+    <!-- 加载中 -->
+    <view wx:if="{{loading}}" class="loading">
+      <text>加载中...</text>
+    </view>
+
+    <!-- 订单卡片 -->
+    <view 
+      wx:for="{{orderList}}" 
+      wx:key="id" 
+      class="order-card"
+    >
+      <!-- 订单头部 -->
+      <view class="order-header">
+        <view class="order-no">订单号：{{item.orderNo}}</view>
+        <view class="order-status status-{{item.status}}">{{item.statusText}}</view>
+      </view>
+
+      <!-- 医院信息 -->
+      <view class="hospital-info">
+        <view class="hospital-name">
+          <text class="icon">🏥</text>
+          <text class="name">{{item.hospitalName}}</text>
+        </view>
+        <view class="department">{{item.department}}</view>
+      </view>
+
+      <!-- 患者信息 -->
+      <view class="patient-info">
+        <view class="info-row">
+          <view class="label">就诊人：</view>
+          <view class="value">{{item.patientName}}</view>
+        </view>
+        <view class="info-row">
+          <view class="label">联系电话：</view>
+          <view class="value phone" bindtap="callPatient" data-phone="{{item.patientPhone}}">
+            {{item.patientPhone}}
+          </view>
+        </view>
+        <view class="info-row">
+          <view class="label">预约时间：</view>
+          <view class="value">{{item.appointmentTime}}</view>
+        </view>
+      </view>
+
+      <!-- 服务信息 -->
+      <view class="service-info">
+        <view class="service-type">
+          <text class="icon">📋</text>
+          <text class="text">{{item.serviceType}}</text>
+        </view>
+        <view class="price">¥{{item.price}}</view>
+      </view>
+
+      <!-- 特殊需求 -->
+      <view wx:if="{{item.specialRequirements}}" class="special-requirements">
+        <view class="label">特殊需求：</view>
+        <view class="content">{{item.specialRequirements}}</view>
+      </view>
+
+      <!-- 操作按钮 -->
+      <view class="order-actions">
+        <!-- 已接单状态：可以开始服务 -->
+        <view wx:if="{{item.status === 1}}" class="action-btn primary" bindtap="startService" data-id="{{item.id}}" data-no="{{item.orderNo}}">
+          开始服务
+        </view>
+        
+        <!-- 服务中状态：可以完成服务 -->
+        <view wx:if="{{item.status === 2}}" class="action-btn success" bindtap="finishService" data-id="{{item.id}}" data-no="{{item.orderNo}}">
+          完成服务
+        </view>
+
+        <view class="action-btn secondary" bindtap="viewDetail" data-id="{{item.id}}">
+          查看详情
+        </view>
+      </view>
+    </view>
+
+    <!-- 空状态 -->
+    <view wx:if="{{!loading && orderList.length === 0}}" class="empty">
+      <text class="empty-icon">📋</text>
+      <text class="empty-text">暂无订单</text>
+    </view>
+  </view>
+</view>

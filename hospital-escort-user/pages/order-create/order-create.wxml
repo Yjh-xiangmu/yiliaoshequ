@@ -1,0 +1,176 @@
+<!--pages/order-create/order-create.wxml-->
+<view class="page">
+  <view class="content">
+    <!-- 医院信息 -->
+    <view class="section">
+      <view class="section-title">就诊医院</view>
+      <view class="hospital-info">
+        <view class="hospital-name">{{hospitalName}}</view>
+        <view class="department-tag">{{department}}</view>
+      </view>
+    </view>
+
+    <!-- 快速选择就诊人 -->
+    <view class="section" wx:if="{{patientList.length > 0}}">
+      <view class="section-title-row">
+        <view class="section-title">快速选择就诊人</view>
+        <view class="section-link" bindtap="goPatientList">管理就诊人 ›</view>
+      </view>
+      <scroll-view scroll-x class="patient-scroll">
+        <view class="patient-list">
+          <view 
+            wx:for="{{patientList}}" 
+            wx:key="id"
+            class="patient-item {{selectedPatientId === item.id ? 'active' : ''}}"
+            bindtap="selectPatient"
+            data-item="{{item}}"
+          >
+            <view class="patient-name">{{item.name}}</view>
+            <view class="patient-relation">{{item.relation}}</view>
+            <view wx:if="{{item.isDefault === 1}}" class="default-dot"></view>
+          </view>
+          <!-- 手动输入选项 -->
+          <view 
+            class="patient-item {{selectedPatientId === 0 ? 'active' : ''}}"
+            bindtap="selectManual"
+          >
+            <view class="patient-name">手动</view>
+            <view class="patient-relation">输入</view>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+
+    <!-- 就诊信息 -->
+    <view class="section">
+      <view class="section-title">就诊信息</view>
+      <view class="form-card">
+        <view class="form-item">
+          <view class="form-label">就诊人姓名<text class="required">*</text></view>
+          <input 
+            class="form-input" 
+            placeholder="请输入就诊人姓名"
+            value="{{formData.patientName}}"
+            bindinput="onInput"
+            data-field="patientName"
+            disabled="{{inputDisabled}}"
+          />
+        </view>
+
+        <view class="form-item">
+          <view class="form-label">联系电话<text class="required">*</text></view>
+          <input 
+            class="form-input" 
+            type="number"
+            placeholder="请输入联系电话"
+            maxlength="11"
+            value="{{formData.patientPhone}}"
+            bindinput="onInput"
+            data-field="patientPhone"
+            disabled="{{inputDisabled}}"
+          />
+        </view>
+
+        <view class="form-item">
+          <view class="form-label">身份证号</view>
+          <input 
+            class="form-input" 
+            placeholder="请输入身份证号（选填）"
+            maxlength="18"
+            value="{{formData.patientIdCard}}"
+            bindinput="onInput"
+            data-field="patientIdCard"
+            disabled="{{inputDisabled}}"
+          />
+        </view>
+
+        <view class="form-item">
+          <view class="form-label">预约时间<text class="required">*</text></view>
+          <picker 
+            mode="date" 
+            value="{{appointmentDate}}" 
+            start="{{minDate}}"
+            bindchange="onDateChange"
+          >
+            <view class="picker-value {{appointmentDate ? '' : 'placeholder'}}">
+              {{appointmentDate || '请选择就诊日期'}}
+            </view>
+          </picker>
+        </view>
+
+        <view class="form-item">
+          <view class="form-label">预约时间段<text class="required">*</text></view>
+          <picker 
+            mode="time" 
+            value="{{appointmentTime}}" 
+            bindchange="onTimeChange"
+          >
+            <view class="picker-value {{appointmentTime ? '' : 'placeholder'}}">
+              {{appointmentTime || '请选择时间段'}}
+            </view>
+          </picker>
+        </view>
+
+        <view class="form-item">
+          <view class="form-label">服务类型</view>
+          <picker 
+            value="{{serviceTypeIndex}}" 
+            range="{{serviceTypes}}"
+            bindchange="onServiceTypeChange"
+          >
+            <view class="picker-value">{{serviceTypes[serviceTypeIndex]}}</view>
+          </picker>
+        </view>
+
+        <view class="form-item textarea">
+          <view class="form-label">特殊需求</view>
+          <textarea 
+            class="form-textarea" 
+            placeholder="请描述您的特殊需求（选填）"
+            value="{{formData.specialRequirements}}"
+            bindinput="onInput"
+            data-field="specialRequirements"
+            maxlength="200"
+          />
+          <view class="textarea-count">{{formData.specialRequirements.length}}/200</view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 费用说明 -->
+    <view class="section">
+      <view class="section-title">费用说明</view>
+      <view class="price-card">
+        <view class="price-item">
+          <view class="price-label">服务费用</view>
+          <view class="price-value">¥100.00</view>
+        </view>
+        <view class="price-note">*实际费用以陪诊员确认为准</view>
+      </view>
+    </view>
+
+    <!-- 服务协议 -->
+    <view class="agreement">
+      <checkbox-group bindchange="onAgreementChange">
+        <label class="agreement-item">
+          <checkbox value="agree" checked="{{agreed}}" />
+          <text class="agreement-text">
+            我已阅读并同意
+            <text class="link">《服务协议》</text>
+            和
+            <text class="link">《隐私政策》</text>
+          </text>
+        </label>
+      </checkbox-group>
+    </view>
+  </view>
+
+  <!-- 底部提交按钮 -->
+  <view class="bottom-bar">
+    <view class="price-info">
+      <view class="price-label">预估费用</view>
+      <view class="price-value">¥100.00</view>
+    </view>
+    <button class="submit-btn" bindtap="submitOrder">提交订单</button>
+  </view>
+</view>

@@ -1,0 +1,82 @@
+<!--pages/user-center/user-center.wxml-->
+<view class="page">
+  <!-- 用户信息卡片 -->
+  <view class="user-card">
+    <view class="user-header">
+      <image class="avatar" src="{{userInfo.avatar || '/images/default-avatar.png'}}" mode="aspectFill"></image>
+      <view class="user-info">
+        <view class="name">{{userInfo.nickname || '微信用户'}}</view>
+        <view class="phone">{{userInfo.phone || '未绑定手机号'}}</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 订单统计 -->
+  <view class="stats-section">
+    <view class="section-title">我的订单</view>
+    <view class="stats-grid">
+      <view class="stat-item" bindtap="goOrderList" data-status="">
+        <view class="stat-value">{{orderStats.total}}</view>
+        <view class="stat-label">全部订单</view>
+      </view>
+      <view class="stat-item" bindtap="goOrderList" data-status="0">
+        <view class="stat-value">{{orderStats.pending}}</view>
+        <view class="stat-label">待接单</view>
+      </view>
+      <view class="stat-item" bindtap="goOrderList" data-status="2">
+        <view class="stat-value">{{orderStats.inService}}</view>
+        <view class="stat-label">服务中</view>
+      </view>
+      <view class="stat-item" bindtap="goOrderList" data-status="3">
+        <view class="stat-value">{{orderStats.completed}}</view>
+        <view class="stat-label">已完成</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 功能列表 -->
+  <view class="menu-section">
+    <view class="menu-item" bindtap="goPatientList">
+      <view class="menu-left">
+        <view class="menu-icon">👥</view>
+        <view class="menu-text">常用就诊人</view>
+      </view>
+      <view class="menu-right">›</view>
+    </view>
+
+    <view class="menu-item" bindtap="goMyEvaluations">
+      <view class="menu-left">
+        <view class="menu-icon">⭐</view>
+        <view class="menu-text">我的评价</view>
+      </view>
+      <view class="menu-right">›</view>
+    </view>
+
+    <view class="menu-item" bindtap="goSettings">
+      <view class="menu-left">
+        <view class="menu-icon">⚙️</view>
+        <view class="menu-text">设置</view>
+      </view>
+      <view class="menu-right">›</view>
+    </view>
+
+    <view class="menu-item" bindtap="goHelp">
+      <view class="menu-left">
+        <view class="menu-icon">❓</view>
+        <view class="menu-text">帮助中心</view>
+      </view>
+      <view class="menu-right">›</view>
+    </view>
+  </view>
+
+  <!-- 关于 -->
+  <view class="about-section">
+    <view class="about-item">版本号：v1.0.0</view>
+    <view class="about-item">社区安心陪诊</view>
+  </view>
+
+  <!-- 退出登录 -->
+  <view class="logout-section">
+    <button class="logout-btn" bindtap="handleLogout">退出登录</button>
+  </view>
+</view>

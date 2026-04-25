@@ -1,0 +1,75 @@
+<!--pages/hospital/hospital.wxml-->
+<view class="page">
+  <!-- 搜索框 -->
+  <view class="search-bar">
+    <view class="search-input">
+      <text class="search-icon">🔍</text>
+      <input 
+        type="text" 
+        placeholder="搜索医院名称或地址" 
+        value="{{keyword}}"
+        bindinput="onSearchInput"
+        bindconfirm="onSearch"
+      />
+    </view>
+    <view class="search-btn" bindtap="onSearch">搜索</view>
+  </view>
+
+  <!-- 医院列表 -->
+  <view class="hospital-list">
+    <!-- 加载中 -->
+    <view wx:if="{{loading}}" class="loading">
+      <text>加载中...</text>
+    </view>
+
+    <!-- 医院卡片 -->
+    <view 
+      wx:for="{{hospitalList}}" 
+      wx:key="id" 
+      class="hospital-card"
+      bindtap="goHospitalDetail"
+      data-id="{{item.id}}"
+    >
+      <view class="hospital-header">
+        <view class="hospital-name">{{item.name}}</view>
+        <view class="hospital-level">{{item.level}}</view>
+      </view>
+      
+      <view class="hospital-address">
+        <text class="icon">📍</text>
+        <text class="text">{{item.address}}</text>
+      </view>
+
+      <view class="hospital-info">
+        <view class="info-item">
+          <text class="icon">📞</text>
+          <text class="text">{{item.phone}}</text>
+        </view>
+      </view>
+
+      <view class="hospital-departments">
+        <text class="label">科室：</text>
+        <view class="department-tags">
+          <text 
+            wx:for="{{item.departments}}" 
+            wx:key="index" 
+            wx:for-item="dept"
+            class="tag"
+          >
+            {{dept}}
+          </text>
+        </view>
+      </view>
+
+      <view class="hospital-action">
+        <view class="action-btn primary">立即预约</view>
+      </view>
+    </view>
+
+    <!-- 空状态 -->
+    <view wx:if="{{!loading && hospitalList.length === 0}}" class="empty">
+      <text class="empty-icon">🏥</text>
+      <text class="empty-text">暂无医院数据</text>
+    </view>
+  </view>
+</view>
