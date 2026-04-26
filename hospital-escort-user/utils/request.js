@@ -56,12 +56,14 @@ const request = {
               });
               reject(result);
             } else {
-              wx.showToast({
-                title: result.message || '请求失败',
-                icon: 'none'
-              });
-              reject(result);
-            }
+              wx.showModal({
+                title: '提示',
+                content: result.message || '请求失败',
+                showCancel: false
+            });
+            
+            reject(result);
+        }
           } else {
             reject({ message: '网络请求失败' });
           }

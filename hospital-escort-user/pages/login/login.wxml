@@ -39,15 +39,7 @@
       微信一键登录
     </button>
 
-    <!-- 开发环境测试登录 -->
-    <button 
-      wx:if="{{isDev}}"
-      class="btn-test-login" 
-      bindtap="handleTestLogin"
-    >
-      <text class="icon">🔧</text>
-      测试登录（开发用）
-    </button>
+    
 
     <!-- 提示信息 -->
     <view class="login-tips">

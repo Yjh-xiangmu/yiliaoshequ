@@ -114,6 +114,9 @@ public class UserService extends ServiceImpl<UserMapper, User> {
             save(user);
             log.info("新用户注册，openid：{}", openid);
         } else {
+            if (user.getStatus() == Constants.UserStatus.DISABLED) {
+                throw new BusinessException("账号已被封禁，请联系管理员");
+            }
             // 老用户：只更新头像，不覆盖用户自己设置的昵称
             if (avatar != null && !avatar.isEmpty()) {
                 user.setAvatar(avatar);

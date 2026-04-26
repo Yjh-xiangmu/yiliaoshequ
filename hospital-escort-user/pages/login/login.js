@@ -5,7 +5,6 @@ const api = require('../../utils/api.js');
 Page({
   data: {
     loginType: 'user',  // user: 用户, escort: 陪诊员
-    isDev: true,        // 是否开发环境
     phone: '',
     password: ''
   },
@@ -109,47 +108,7 @@ Page({
     });
   },
 
-  /**
-   * 测试登录（开发用）
-   */
-  handleTestLogin() {
-    console.log('测试登录开始');
-    
-    wx.showLoading({
-      title: '登录中...',
-      mask: true
-    });
-
-    api.testUserLogin()
-      .then(res => {
-        wx.hideLoading();
-        console.log('测试登录成功：', res.data);
-        
-        // 保存用户信息，标记为用户类型
-        const userInfo = {
-          ...res.data,
-          userType: 'user'
-        };
-        app.setUserInfo(userInfo, res.data.token);
-        
-        wx.showToast({
-          title: '登录成功',
-          icon: 'success',
-          duration: 1500
-        });
-
-        // 跳转到用户首页
-        setTimeout(() => {
-          wx.redirectTo({
-            url: '/pages/index/index'
-          });
-        }, 1500);
-      })
-      .catch(err => {
-        wx.hideLoading();
-        console.error('测试登录失败：', err);
-      });
-  },
+ 
 
   /**
    * 陪诊员登录

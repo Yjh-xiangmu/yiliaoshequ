@@ -38,6 +38,7 @@ public class WebConfig implements WebMvcConfigurer {
                         "/api/test/**",                     // 测试接口
                         "/api/escort-apply/submit",         // 陪诊员申请提交
                         "/api/escort-apply/status",         // 陪诊员申请状态查询
+                        "/admin/**",                    // 管理后台静态页面
                         "/error",
                         "/cert/**",                     // 放行证件图片访问
                         "/avatar/**"                    // 放行头像访问
